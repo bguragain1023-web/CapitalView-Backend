@@ -1,0 +1,19 @@
+{
+  "name": "cv_server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "type":"module",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.2"
+  },
+
+
+  "scripts": {
+    "dev" : "nodemon server.js",
+    "start": "node server.js"
+  }
+}
