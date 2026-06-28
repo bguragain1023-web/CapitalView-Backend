@@ -3,6 +3,18 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+// connect DB
+import { connectDB } from "./config/mongodbConnect.js";
+connectDB();
+
+// Middlewares
+app.use(express.json());
+
+// API ENDPOINTS
+import userRouter from "./routers/userRouters.js";
+
+app.use("/api/v1/users", userRouter);
+
 app.get("/", (req, res) => {
   res.json({
     message: "It's Live",
