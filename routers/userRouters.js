@@ -1,5 +1,6 @@
 import express from "express";
 import { insertUser } from "../models/user/UserModel.js";
+import { hasspassword } from "../utils/bcrypt.js";
 
 const router = express.Router();
 
@@ -9,6 +10,9 @@ router.post("/", async (req, res, next) => {
     //getthe userObj
     //data verifiacation
     //encrypt the password
+
+    req.body.password = hasspassword(req.body.password);
+
     const user = await insertUser(req.body);
     user?._id
       ? res.json({
