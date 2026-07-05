@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -8,6 +9,7 @@ import { connectDB } from "./config/mongodbConnect.js";
 connectDB();
 
 // Middlewares
+app.use(cors());
 app.use(express.json());
 
 // API ENDPOINTS

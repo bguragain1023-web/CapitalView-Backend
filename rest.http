@@ -13,7 +13,6 @@ Content-Type: application/json
 
 {
     "name" : "Brazzy",
-    "email": "b@b.com",
+    "email": "b@s.cm",
     "password": "hello"
-    
 }
