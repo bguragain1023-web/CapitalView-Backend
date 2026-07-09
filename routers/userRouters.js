@@ -1,6 +1,7 @@
 import express from "express";
 import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
 import { comparePassssword, hashpassword } from "../utils/bcrypt.js";
+import { signJWT } from "../utils/jwt.js";
 
 const router = express.Router();
 
@@ -46,20 +47,22 @@ router.post("/login", async (req, res, next) => {
       // find user by email
 
       const user = await getUserByEmail(email);
+      if (user?._id) {
+        const isMatched = comparePassssword(password, user.password);
+        if (isMatched) {
+          // jwt and store the jwt in db  then return the user{} with jwt
+          const accessJWT = signJWT({ email: email });
 
-      // match the password
-      const isMatched = comparePassssword(password, user.password);
-      if (isMatched) {
-        // jwt and store the jwt in db  then return the user{} with jwt
-        res.json({
-          status: "success",
-          messgae: " loggin successful",
-          user,
-        });
-        return;
+          user.password = undefined;
+          res.json({
+            status: "success",
+            messgae: " loggin successful",
+            user,
+            accessJWT,
+          });
+          return;
+        }
       }
-
-      // jwt and store the jwt in db  then return the user{} with jwt
     }
 
     res.status(401).json({

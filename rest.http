@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
     "name" : "Brazzy",
-    "email": "b@s.cm",
+    "email": "b@sq.cm",
     "password": "hello"
 }
 
@@ -24,6 +24,6 @@ Content-Type: application/json
 
 {
   
-    "email": "b@s.cm",
-    "password": "hell"
+    "email": "b@sq.cm",
+    "password": "hello"
 }
