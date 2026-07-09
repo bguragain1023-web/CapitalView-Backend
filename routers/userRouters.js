@@ -1,6 +1,6 @@
 import express from "express";
-import { insertUser } from "../models/user/UserModel.js";
-import { hasspassword } from "../utils/bcrypt.js";
+import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
+import { comparePassssword, hashpassword } from "../utils/bcrypt.js";
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post("/", async (req, res, next) => {
     //data verifiacation
     //encrypt the password
 
-    req.body.password = hasspassword(req.body.password);
+    req.body.password = hashpassword(req.body.password);
 
     const user = await insertUser(req.body);
     user?._id
@@ -36,6 +36,41 @@ router.post("/", async (req, res, next) => {
   }
 });
 //user Login
+
+router.post("/login", async (req, res, next) => {
+  try {
+    // receive email and password
+    const { email, password } = req.body;
+    console.log(email, password);
+    if (email && password) {
+      // find user by email
+
+      const user = await getUserByEmail(email);
+
+      // match the password
+      const isMatched = comparePassssword(password, user.password);
+      if (isMatched) {
+        // jwt and store the jwt in db  then return the user{} with jwt
+        res.json({
+          status: "success",
+          messgae: " loggin successful",
+          user,
+        });
+        return;
+      }
+
+      // jwt and store the jwt in db  then return the user{} with jwt
+    }
+
+    res.status(401).json({
+      error: "Invalid username or password",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+});
 
 // user Profile
 
