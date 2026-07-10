@@ -42,7 +42,7 @@ router.post("/login", async (req, res, next) => {
   try {
     // receive email and password
     const { email, password } = req.body;
-    console.log(email, password);
+
     if (email && password) {
       // find user by email
 
@@ -56,7 +56,7 @@ router.post("/login", async (req, res, next) => {
           user.password = undefined;
           res.json({
             status: "success",
-            messgae: " loggin successful",
+            message: " loggin successful",
             user,
             accessJWT,
           });
@@ -66,7 +66,7 @@ router.post("/login", async (req, res, next) => {
     }
 
     res.status(401).json({
-      error: "Invalid username or password",
+      error: "Invalid email or password",
     });
   } catch (error) {
     res.status(500).json({
