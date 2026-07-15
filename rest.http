@@ -3,8 +3,8 @@
 
 ### USER
 ### get user 
-GET http://localhost:8000
-
+GET http://localhost:8000/api/v1/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NDA4MTk5NCwiZXhwIjoxNzg0MDgyMjk0fQ.OBm9bQkpvXMhszLQPF978WNDFu1WsDinXXHMGxm7FZw
 
 ### Post new user
 
@@ -24,6 +24,6 @@ Content-Type: application/json
 
 {
   
-    "email": "b@sq.cm",
-    "password": "hello"
+    "email": "a@a",
+    "password": "aaa"
 }
