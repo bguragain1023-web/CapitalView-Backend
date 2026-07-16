@@ -3,16 +3,13 @@ import { getUserByEmail, insertUser } from "../models/user/UserModel.js";
 import { comparePassssword, hashpassword } from "../utils/bcrypt.js";
 import { signJWT } from "../utils/jwt.js";
 import { auth } from "../middleware/authMiddleware.js";
+import { insertTransaction } from "../models/transaction/transactionModel.js";
 
 const router = express.Router();
 
 // User signUP
 router.post("/", async (req, res, next) => {
   try {
-    //getthe userObj
-    //data verifiacation
-    //encrypt the password
-
     req.body.password = hashpassword(req.body.password);
 
     const user = await insertUser(req.body);
@@ -85,6 +82,45 @@ router.get("/", auth, (req, res, next) => {
       message: "here is the user profile",
       user,
     });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+});
+
+//add transaction
+router.post("/transaction", auth, async (req, res, next) => {
+  console.log("req.body:", req.body);
+  try {
+    const user = req.userInfo;
+    const { _id } = user;
+    if (user?._id) {
+      const obj = {
+        ...req.body,
+        userId: _id,
+      };
+
+      const transaction = await insertTransaction(obj);
+
+      transaction
+        ? res.json({
+            status: "success",
+            message: " transaction added successfully",
+          })
+        : res.json({
+            status: "error",
+            message: "something went wrong while adding transaction",
+          });
+      return;
+    }
+    res.json({
+      status: "error",
+      message: "User not found",
+    });
+    //check every item is filled
+    // check if the user is there
+    // send userId and transaction data to the transaction table
   } catch (error) {
     res.status(500).json({
       error: error.message,

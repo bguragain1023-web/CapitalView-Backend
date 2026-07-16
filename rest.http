@@ -4,9 +4,11 @@
 ### USER
 ### get user 
 GET http://localhost:8000/api/v1/users
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NDA4MTk5NCwiZXhwIjoxNzg0MDgyMjk0fQ.OBm9bQkpvXMhszLQPF978WNDFu1WsDinXXHMGxm7FZw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NDE4MTgyNywiZXhwIjoxNzg0MjY4MjI3fQ.mhMRHLXVsMN_RT3qIHGb6KLNSwCRmUEs_20tdypfcqc
+
 
 ### Post new user
+
 
 POST http://localhost:8000/api/v1/users
 Content-Type: application/json
@@ -26,4 +28,17 @@ Content-Type: application/json
   
     "email": "a@a",
     "password": "aaa"
+}
+
+### add transaction
+POST http://localhost:8000/api/v1/users/transaction
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NDE4MTgyNywiZXhwIjoxNzg0MjY4MjI3fQ.mhMRHLXVsMN_RT3qIHGb6KLNSwCRmUEs_20tdypfcqc
+
+{
+    "userId" :"6a560842fa04dcb44853ec2c",
+    "type" : "income",
+    "title": "wages",
+    "amount": 100,
+    "date": "2026-05-02"
 }
