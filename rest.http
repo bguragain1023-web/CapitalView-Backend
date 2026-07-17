@@ -36,9 +36,14 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NDE4MTgyNywiZXhwIjoxNzg0MjY4MjI3fQ.mhMRHLXVsMN_RT3qIHGb6KLNSwCRmUEs_20tdypfcqc
 
 {
-    "userId" :"6a560842fa04dcb44853ec2c",
+    "userId" :"6a560842fa04dcec",
     "type" : "income",
-    "title": "wages",
+    "title": "behfg",
     "amount": 100,
     "date": "2026-05-02"
 }
+
+
+### Get transaction
+GET http://localhost:8000/api/v1/transaction
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNAcyIsImlhdCI6MTc4NDI3Mzk0NSwiZXhwIjoxNzg0MzYwMzQ1fQ.6treaYmJTfmQMV0hT0CpFxOwS_JwFjyk2_ahrmq4yNY

@@ -1,6 +1,9 @@
 import express from "express";
 import { auth } from "../middleware/authMiddleware.js";
-import { insertTransaction } from "../models/transaction/transactionModel.js";
+import {
+  getTransactionByUserId,
+  insertTransaction,
+} from "../models/transaction/transactionModel.js";
 
 const router = express.Router();
 
@@ -44,4 +47,25 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+//get transaction
+
+router.get("/", async (req, res, next) => {
+  try {
+    const { _id } = req.userInfo;
+    console.log("id is :", _id);
+
+    const transaction = await getTransactionByUserId(_id);
+    console.log("answer", transaction);
+
+    res.json({
+      status: "success",
+      message: "here is your transaction",
+      transaction,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+});
 export default router;
