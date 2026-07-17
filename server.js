@@ -14,8 +14,11 @@ app.use(express.json());
 
 // API ENDPOINTS
 import userRouter from "./routers/userRouters.js";
+import transactionRouter from "./routers/transactionRouters.js";
+import { auth } from "./middleware/authMiddleware.js";
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/transaction", auth, transactionRouter);
 
 app.get("/", (req, res) => {
   res.json({

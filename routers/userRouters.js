@@ -89,44 +89,6 @@ router.get("/", auth, (req, res, next) => {
   }
 });
 
-//add transaction
-router.post("/transaction", auth, async (req, res, next) => {
-  console.log("req.body:", req.body);
-  try {
-    const user = req.userInfo;
-    const { _id } = user;
-    if (user?._id) {
-      const obj = {
-        ...req.body,
-        userId: _id,
-      };
-
-      const transaction = await insertTransaction(obj);
-
-      transaction
-        ? res.json({
-            status: "success",
-            message: " transaction added successfully",
-          })
-        : res.json({
-            status: "error",
-            message: "something went wrong while adding transaction",
-          });
-      return;
-    }
-    res.json({
-      status: "error",
-      message: "User not found",
-    });
-    //check every item is filled
-    // check if the user is there
-    // send userId and transaction data to the transaction table
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-});
 // user Profile
 
 export default router;
