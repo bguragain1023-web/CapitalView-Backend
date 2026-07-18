@@ -8,5 +8,8 @@ export const insertTransaction = (transactionObj) => {
 //get
 
 export const getTransactionByUserId = (userId) => {
+  if (!userId) {
+    throw new Error("user id required");
+  }
   return transactionSchema.find({ userId });
 };

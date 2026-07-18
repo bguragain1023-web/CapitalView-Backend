@@ -54,7 +54,7 @@ router.get("/", async (req, res, next) => {
     const { _id } = req.userInfo;
     console.log("id is :", _id);
 
-    const transaction = await getTransactionByUserId(_id);
+    const transaction = (await getTransactionByUserId(_id)) || [];
     console.log("answer", transaction);
 
     res.json({
