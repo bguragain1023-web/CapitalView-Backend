@@ -42,9 +42,7 @@ router.post("/", async (req, res, next) => {
     // check if the user is there
     // send userId and transaction data to the transaction table
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
   }
 });
 
@@ -64,13 +62,11 @@ router.get("/", async (req, res, next) => {
       transaction,
     });
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   try {
     const ids = req.body;
     const { _id } = req.userInfo;
@@ -89,9 +85,7 @@ router.delete("/", async (req, res) => {
       message: `${result.deletedCount} transaction(s) has been deleted`,
     });
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    next(error);
   }
 });
 

@@ -10,7 +10,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6
 ### Post new user
 
 
-POST http://localhost:8000/api/v1/users
+POST http://localhost:8000/api/v1/userse
 Content-Type: application/json
 
 {

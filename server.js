@@ -16,6 +16,7 @@ app.use(express.json());
 import userRouter from "./routers/userRouters.js";
 import transactionRouter from "./routers/transactionRouters.js";
 import { auth } from "./middleware/authMiddleware.js";
+import { errorHandler } from "./middleware/errorHandlerMiddleware.js";
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/transaction", auth, transactionRouter);
@@ -25,6 +26,16 @@ app.get("/", (req, res) => {
     message: "It's Live",
   });
 });
+
+// 404 page not found error
+app.use((req, res, next) => {
+  const error = new Error(" Page Not Found");
+  error.statusCode = 404;
+  next(error);
+});
+// Glabal error handler
+
+app.use(errorHandler);
 
 app.listen(PORT, (error) => {
   error
