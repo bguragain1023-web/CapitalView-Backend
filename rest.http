@@ -26,11 +26,11 @@ Content-Type: application/json
 
 {
   
-    "email": "a@a",
-    "password": "aaa"
+    "email": "s@s",
+    "password": "sss"
 }
 
-### add transaction
+### add transaction for specific user
 POST http://localhost:8000/api/v1/users/transaction
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NDE4MTgyNywiZXhwIjoxNzg0MjY4MjI3fQ.mhMRHLXVsMN_RT3qIHGb6KLNSwCRmUEs_20tdypfcqc
@@ -44,6 +44,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6
 }
 
 
-### Get transaction
+### Get transaction for specific user
 GET http://localhost:8000/api/v1/transaction
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNAcyIsImlhdCI6MTc4NDI3Mzk0NSwiZXhwIjoxNzg0MzYwMzQ1fQ.6treaYmJTfmQMV0hT0CpFxOwS_JwFjyk2_ahrmq4yNY
+
+
+
+###Delete Transaction for specific user
+Delete http://localhost:8000/api/v1/transaction
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNAcyIsImlhdCI6MTc4NDY4ODc4NiwiZXhwIjoxNzg0Nzc1MTg2fQ.hk3fUeyAYN6jIyKMbmXeLT9qdHWgcX9Mh6bFUrYRoxk
+Content-Type: application/json
+
+["6a59dbe12f625d363d8646cb" ]

@@ -13,3 +13,18 @@ export const getTransactionByUserId = (userId) => {
   }
   return transactionSchema.find({ userId });
 };
+
+//delete
+
+export const deleteTransactionById = (ids, userId) => {
+  console.log("array:", ids);
+  console.log("user:", userId);
+  if (!ids || ids.length === 0) {
+    throw new Error("No transaction found");
+  }
+
+  return transactionSchema.deleteMany({
+    _id: { $in: ids },
+    userId: userId,
+  });
+};

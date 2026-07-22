@@ -1,6 +1,7 @@
 import express from "express";
 import { auth } from "../middleware/authMiddleware.js";
 import {
+  deleteTransactionById,
   getTransactionByUserId,
   insertTransaction,
 } from "../models/transaction/transactionModel.js";
@@ -68,4 +69,30 @@ router.get("/", async (req, res, next) => {
     });
   }
 });
+
+router.delete("/", async (req, res) => {
+  try {
+    const ids = req.body;
+    const { _id } = req.userInfo;
+    console.log("ids array:", ids);
+    console.log("userId:", _id);
+    const result = await deleteTransactionById(ids, _id);
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({
+        status: "error",
+        message: "No matching transaction found",
+      });
+    }
+    res.json({
+      status: "success",
+      message: `${result.deletedCount} transaction(s) has been deleted`,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+});
+
 export default router;
