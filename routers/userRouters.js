@@ -36,17 +36,13 @@ router.post("/", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    // receive email and password
     const { email, password } = req.body;
 
     if (email && password) {
-      // find user by email
-
       const user = await getUserByEmail(email);
       if (user?._id) {
         const isMatched = comparePassssword(password, user.password);
         if (isMatched) {
-          // jwt and store the jwt in db  then return the user{} with jwt
           const accessJWT = signJWT({ email: email });
 
           user.password = undefined;
@@ -82,7 +78,5 @@ router.get("/", auth, (req, res, next) => {
     next(error);
   }
 });
-
-// user Profile
 
 export default router;

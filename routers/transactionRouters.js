@@ -10,7 +10,6 @@ const router = express.Router();
 
 //add transaction
 router.post("/", async (req, res, next) => {
-  console.log(req.body);
   try {
     const { _id } = req.userInfo;
 
@@ -38,23 +37,16 @@ router.post("/", async (req, res, next) => {
       status: "error",
       message: "User not found",
     });
-    //check every item is filled
-    // check if the user is there
-    // send userId and transaction data to the transaction table
   } catch (error) {
     next(error);
   }
 });
 
-//get transaction
-
 router.get("/", async (req, res, next) => {
   try {
     const { _id } = req.userInfo;
-    console.log("id is :", _id);
 
     const transaction = (await getTransactionByUserId(_id)) || [];
-    console.log("answer", transaction);
 
     res.json({
       status: "success",
@@ -70,8 +62,7 @@ router.delete("/", async (req, res, next) => {
   try {
     const ids = req.body;
     const { _id } = req.userInfo;
-    console.log("ids array:", ids);
-    console.log("userId:", _id);
+
     const result = await deleteTransactionById(ids, _id);
 
     if (result.deletedCount === 0) {

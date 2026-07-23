@@ -21,12 +21,6 @@ import { errorHandler } from "./middleware/errorHandlerMiddleware.js";
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/transaction", auth, transactionRouter);
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "It's Live",
-  });
-});
-
 // 404 page not found error
 app.use((req, res, next) => {
   const error = new Error(" Page Not Found");

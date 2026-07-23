@@ -17,8 +17,6 @@ export const getTransactionByUserId = (userId) => {
 //delete
 
 export const deleteTransactionById = (ids, userId) => {
-  console.log("array:", ids);
-  console.log("user:", userId);
   if (!ids || ids.length === 0) {
     throw new Error("No transaction found");
   }
