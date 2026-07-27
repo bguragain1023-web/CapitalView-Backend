@@ -4,6 +4,7 @@ import {
   deleteTransactionById,
   getTransactionByUserId,
   insertTransaction,
+  updateByTransactionId,
 } from "../models/transaction/transactionModel.js";
 
 const router = express.Router();
@@ -42,6 +43,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+// fetch Transaction
 router.get("/", async (req, res, next) => {
   try {
     const { _id } = req.userInfo;
@@ -57,6 +59,8 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+//Delete Transaction
 
 router.delete("/", async (req, res, next) => {
   try {
@@ -74,6 +78,35 @@ router.delete("/", async (req, res, next) => {
     res.json({
       status: "success",
       message: `${result.deletedCount} transaction(s) has been deleted`,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//Update Transaction
+
+router.patch("/:id", async (req, res, next) => {
+  try {
+    //get user id
+
+    const userId = req.userInfo._id;
+
+    const { id } = req.params;
+    const result = await updateByTransactionId(id, userId, req.body);
+    if (result.matchedCount === 0) {
+      return res.status(404).json({
+        status: "error",
+        message: "Transaction not found ",
+      });
+    }
+
+    //get transaction id
+    // call update model
+    //return success
+    res.json({
+      status: "success",
+      message: "Transaction updated",
     });
   } catch (error) {
     next(error);

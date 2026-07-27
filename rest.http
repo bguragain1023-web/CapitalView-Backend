@@ -26,8 +26,8 @@ Content-Type: application/json
 
 {
   
-    "email": "s@s",
-    "password": "sss"
+    "email": "a@a",
+    "password": "aaa"
 }
 
 ### add transaction for specific user
@@ -46,8 +46,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6
 
 ### Get transaction for specific user
 GET http://localhost:8000/api/v1/transaction
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNAcyIsImlhdCI6MTc4NDI3Mzk0NSwiZXhwIjoxNzg0MzYwMzQ1fQ.6treaYmJTfmQMV0hT0CpFxOwS_JwFjyk2_ahrmq4yNY
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NTEzODY0MSwiZXhwIjoxNzg1MjI1MDQxfQ.WrKGHvix247xxt9MOrZAuohXiGTsQmA097VmkkOo3wk
 
 
 ###Delete Transaction for specific user
@@ -56,3 +55,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNAcyIsImlhdCI6
 Content-Type: application/json
 
 ["6a59dbe12f625d363d8646cb" ]
+
+
+### Update Transaction
+patch http://localhost:8000/api/v1/transaction
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYSIsImlhdCI6MTc4NTEzODY0MSwiZXhwIjoxNzg1MjI1MDQxfQ.WrKGHvix247xxt9MOrZAuohXiGTsQmA097VmkkOo3wk
+Content-Type: application/json
+
+{
+     
+      "type": "income",
+      "title": "Wages",
+      "amount": 400
+
+
+}

@@ -26,3 +26,17 @@ export const deleteTransactionById = (ids, userId) => {
     userId: userId,
   });
 };
+
+export const updateByTransactionId = (id, userId, data) => {
+  if (!id) {
+    throw new Error("No Transaction Found ");
+  }
+
+  return transactionSchema.updateOne(
+    {
+      _id: id,
+      userId: userId,
+    },
+    { $set: data },
+  );
+};
