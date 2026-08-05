@@ -101,9 +101,6 @@ router.patch("/:id", async (req, res, next) => {
       });
     }
 
-    //get transaction id
-    // call update model
-    //return success
     res.json({
       status: "success",
       message: "Transaction updated",
@@ -113,4 +110,40 @@ router.patch("/:id", async (req, res, next) => {
   }
 });
 
+//get estimate
+
+router.post("/", async (req, res, next) => {
+  const {
+    totalBalance,
+    numberOfMonths,
+    estimateExpenses,
+    estimateIncome,
+    estimateTotalBalance,
+    mostSpendingItem,
+    targetMOnths,
+  } = req.body;
+  try {
+    const categoryList = Object.entries(mostSpendingItem)
+      .map(([category, amount]) => `${category}: $${amount}`)
+      .join(", ");
+
+    const prompt = `Here is a user's expense breakdown by category over the last ${numberOfMonths} months: ${categoryList}. In another ${targetMOnths} months user's estimate expenses is ${estimateExpenses}, estimate income is ${estimateIncome} and estimate Balance is ${estimateTotalBalance}, Identify the category they spend the most on and the category they spend the least on, then suggest one practical way they could reduce spending in their highest category . Respond in this exact format:
+Most spending: <category> ($<amount>)
+Least spending: <category> ($<amount>)
+Suggestion to reduce expenses: <one short sentence>
+suggestion to increase income : <one short sentence>
+
+`;
+
+    const aiResponse = await anthropic.message.create({
+      model: "claude-sonnet-4-6",
+      max_token: 300,
+      message: [{ role: "user", content: prompt }],
+    });
+
+    const insight = aiResponse.content[0].text;
+  } catch (error) {
+    next(error);
+  }
+});
 export default router;

@@ -15,11 +15,13 @@ app.use(express.json());
 // API ENDPOINTS
 import userRouter from "./routers/userRouters.js";
 import transactionRouter from "./routers/transactionRouters.js";
+import estimateRouter from "./routers/estimateRouter.js";
 import { auth } from "./middleware/authMiddleware.js";
 import { errorHandler } from "./middleware/errorHandlerMiddleware.js";
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/transaction", auth, transactionRouter);
+app.use("/api/v1/estimate", auth, estimateRouter);
 
 // 404 page not found error
 app.use((req, res, next) => {
